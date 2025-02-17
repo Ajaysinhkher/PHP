@@ -1,8 +1,10 @@
 
 <?php
 
-    $heading = "Contact-Us";
-    require "view/contact.view.php";
-    require "function.php" ;
+    // $heading = "Contact-Us";
+    require view("contact.view.php",[
+        $heading = 'Contact-us',
+    ]);
+    
 ?>
 

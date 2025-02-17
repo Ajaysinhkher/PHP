@@ -2,12 +2,13 @@
  
 return [
 
-    '/phpLaracast' => 'controller/home.php',
+    '/phpLaracast' => 'controller/index.php',
     '/phpLaracast/about'=> 'controller/about.php',
     '/phpLaracast/contact'=> 'controller/contact.php',
     '/phpLaracast/notes'=> 'controller/notes/index.php',
     '/phpLaracast/note'=> 'controller/notes/show.php',
-    '/phpLaracast/create'=>'controller/notes/create.php',  
+    '/phpLaracast/create'=>'controller/notes/create.php', 
+    '/'=>'controller/index.php' ,
     
     ];
 ?> 

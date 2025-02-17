@@ -1,5 +1,10 @@
-
 <?php
+namespace core;
+
+$config = require base_path('config.php');
+use PDO;  
+
+
 class Database{
 
     public $connection;
@@ -9,11 +14,14 @@ class Database{
     public function __construct($config){
        
         $dsn  = "mysql:host={$config['host']};port={$config['port']};dbname={$config['dbname']};charset=utf8mb4";
-        $this->connection = new PDO($dsn,"root","");
+        $this->connection = new PDO($dsn,"root","kher");
 
-        // echo '<h3 class="text-black">connection successfull</h3>';
+    //     // echo '<h3 class="text-black">connection successfull</h3>';
 
     }
+
+
+    
 
 
     public function query($query,$params = []){

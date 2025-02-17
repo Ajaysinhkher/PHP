@@ -1,5 +1,5 @@
 <?php
-
+use core\Response;
     function dd($value)
     {
         echo "<pre>";
@@ -17,6 +17,21 @@
         if(!$condition){
             abort($status);
         }
+    }
+
+    function base_path($path)
+    {
+       
+        return BASE_PATH . $path; 
+    }
+
+    function view($path, $attributes = [])
+    {
+      
+        extract($attributes);
+        // die();
+        return base_path('view/'. $path);
+
     }
 
 

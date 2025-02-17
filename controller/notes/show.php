@@ -1,24 +1,52 @@
 <?php
-$config = require "config.php";
-$db = new Database($config['database']);
-require "function.php";
 
+use core\Database;
+$config = require base_path("config.php");
+$db = new Database($config['database']);
+// require "function.php";
 
 
 $heading = 'Note';
-$currentUserId = 1;
+$currentUserId = 25;
 
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    die("Invalid note ID!");
+
+if($_SERVER['REQUEST_METHOD']==='POST')
+{
+    $note = $db->query('select * from notes where id = :id',[
+        'id'=> $_GET['id']
+    ])->findOrFail();
+
+    authorize((int)$note['user_id'] === $currentUserId);
+
+    $db->query('delete from notes where id= :id',[
+        'id'=>$_GET['id']
+    ]);
+
+    header('location: /phpLaracast/notes');
+    exit();
 }
 
-$note = $db->query("select * from notes where id = :id", [ 'id'=>$_GET['id'] ])->findOrFail();
-// echo "User ID: " . $note['user_id'];
-// var_dump($note); 
+else{
+
+    $note = $db->query("select * from notes where id = :id", [ 'id'=>$_GET['id'] ])->findOrFail();
+    // echo "User ID: " . $note['user_id'];
+    // var_dump($note); 
+    
+    
+    // if user is unauthorized
+    authorize((int)$note['user_id'] === $currentUserId);
+    
+    
+    require view("notes/show.view.php",[
+        $heading = 'Note:',
+    ]);
+}
 
 
-// if user is unauthorized
-authorize((int)$note['user_id'] === $currentUserId);
 
-require "view/notes/show.view.php";
+
+
+
+
+
 

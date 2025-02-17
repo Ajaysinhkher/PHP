@@ -1,21 +1,24 @@
 <?php 
+use core\Database;
 
 
-$config = require('config.php');
+
+$config = require base_path('config.php');
 $db = new Database($config['database']);
-$heading ="create-note";
+// $heading ="create-note";
 
-require 'Validator.php';
+require base_path('core/Validator.php');
+$errors = [];
 
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
 
-    $errors = [];
+  
     // $validator = new Validator();
 
 
 
-    if(!$validator::string($_POST['body'],1,1000)){
+    if(!Validator::string($_POST['body'],1,1000)){
         $errors['body'] = 'A body with characters in range 0 to 1000 is required!';
     }
 
@@ -31,7 +34,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     }
 }
 
-require 'view/notes/create.view.php';
+$heading = 'Create-Note:';
+$notes = [];
+
+require view("notes/create.view.php",[
+    'heading' =>$heading,
+    'notes'=>$notes
+]);
 
 
 

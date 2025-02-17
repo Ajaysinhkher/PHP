@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <?php require "view/partials/nav.php"?>
+    <?php require base_path("view/partials/nav.php")?>
     <h1 class="text-black"><?php echo $heading?></h1>
     <!-- <p class="text-black">welcome to the notes page:</p> -->
 
