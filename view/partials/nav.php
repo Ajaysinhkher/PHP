@@ -18,7 +18,10 @@
                 <li><a href="/phpLaracast" class="text-white text-lg font-semibold hover:underline">Home</a></li>
                 <li><a href="/phpLaracast/about" class="text-white text-lg font-semibold hover:underline">About</a></li>
                 <li><a href="/phpLaracast/contact" class="text-white text-lg font-semibold hover:underline">Contact</a></li>
+                <?php if ($_SESSION['user'] ?? false) : ?>
                 <li><a href="/phpLaracast/notes" class="text-white text-lg font-semibold hover:underline">Notes</a></li>
+                <?php endif;?>
+                
             </ul>
 
             <!-- Register or Profile Icon (Right Side) -->
@@ -33,8 +36,20 @@
                 <?php else : ?>
                     <!-- Show Register Link When Not Logged In -->
                     <a href="/phpLaracast/register" class="text-white text-lg font-semibold hover:underline">Register</a>
+                    <a href="/phpLaracast/login" class="text-white ml-5 text-lg font-semibold hover:underline">Login</a>
                 <?php endif; ?>
             </div>
+
+            <?php if($_SESSION['user'] ?? false): ?>
+                <div>
+
+                 <form method="POST" action="/phpLaracast/logout">
+                            <input type="hidden" name="_method" value="DELETE"/>
+                            <button class="text-white">Log Out</button>
+                            </form>
+                </div>
+            <?php endif; ?>
+
         </div>
     </nav>
 </body>

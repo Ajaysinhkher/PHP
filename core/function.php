@@ -31,11 +31,29 @@ use Core\Response;
       
         
         extract($attributes);
-        require base_path('view/'. $path);
-       
+        require base_path('view/'. $path);   
 
     }
 
+    function login($user)
+    {
+        $_SESSION['user'] = [
+        'email' => $user['email']
+    ];
+     session_regenerate_id(true);    
+    }
+
+    // function to logout a user:
+    function logout()
+    {
+        // empty the session array and then destroy it
+        $_SESSION = [];
+        session_destroy();
+
+        // also delete the cookies from browser which where created during session creation
+        $params = session_get_cookie_params();
+        setcookie('PHPSESSID', '', time() - 3600, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+    }
 
 
 ?>

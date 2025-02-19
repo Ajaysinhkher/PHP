@@ -52,11 +52,8 @@ else{
     ]) ;
 }
 
-// mark taht t h euser has logged in:
-$_SESSION['user']=[
-    'email'=>$email,
-
-];
+// mark that the user has logged in:
+login($user);
 
 header('location: /');
 exit();

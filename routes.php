@@ -27,6 +27,13 @@ $router->get('/phpLaracast/note/edit','controller/notes/edit.php');
 $router->patch('/phpLaracast/note/update','controller/notes/update.php');
 
 $router->get('/phpLaracast/register','controller/registration/create.php')->only('guest');
-$router->post('/phpLaracast/register','controller/registration/store.php');
+$router->post('/phpLaracast/register','controller/registration/store.php')->only('guest');
 
+
+$router->get('/phpLaracast/login','controller/sessions/create.php')->only('guest');
+$router->post('/phpLaracast/login','controller/sessions/store.php')->only('guest');
+
+$try = $router->delete('/phpLaracast/logout','controller/sessions/destroy.php')->only('auth');
+
+// dd($try);
 ?> 
