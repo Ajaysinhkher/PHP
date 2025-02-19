@@ -1,5 +1,5 @@
 <?php
-namespace core;
+namespace Core;
 
 $config = require base_path('config.php');
 use PDO;  
